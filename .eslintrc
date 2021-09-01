@@ -1,23 +1,23 @@
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
   },
-  extends: ["airbnb"],
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
-  },
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
     },
-    ecmaVersion: 2018,
-    sourceType: "module",
+    "project": "./tsconfig.eslint.json"
   },
-  plugins: ["react", "@typescript-eslint"],
-  rules: {
-    quotes: ["error", "double"], // 더블 쿼터 사용
+  "plugins": ["react","typescript-eslint"],
+  "extends": ["airbnb"],
+  "rules": {
+    "quotes": ["error", "double"], // 더블 쿼터 사용
     "@typescript-eslint/quotes": ["error", "double"], // 더블 쿼터 사용
     "no-unused-vars": "off", // 사용안한 변수 경고 중복
     "@typescript-eslint/no-unused-vars": "warn", // 사용안한 변수는 경고
@@ -46,24 +46,27 @@ module.exports = {
     "no-case-declarations": "off", // case문 안에서 변수 선언 사용하기
     "react/jsx-filename-extension": [
       1,
-      { extensions: [".js", ".jsx", ".tsx"] }, // jsx사용가능한 확장자 설정
+      { "extensions": [".js", ".jsx", ".tsx"] }, // jsx사용가능한 확장자 설정
     ],
     "import/extensions": [
       "error",
       "ignorePackages",
       {
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
       }, // import 시 확장자명은 사용하지 않는다.
     ],
   },
-  settings: {
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx", ".d.ts"],
-      },
-    },
+  "settings": {
+    "import/resolver" :{
+      "node" : {
+        "extensions" : [".js",".jsx",".ts",".tsx",".d.ts"]
+      }
+    }
   },
-};
+  "globals": {
+    "JSX": true // JSX 에러 발생 안하게
+  }
+}

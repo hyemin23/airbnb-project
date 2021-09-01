@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
+    "types": ["@types/node"],
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["node_modules/@types"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,14 +14,22 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "downlevelIteration": true,
+    "baseUrl": "./",
+  "paths": {
+    "@/components/*": ["components/*"],
+    "@/hooks/*": ["hooks/*"],
+    "@/assets/*": ["public/static/*"],
+    "@/images/*":["images/*"]
   },
+},
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "types/image.d.ts"
+
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
