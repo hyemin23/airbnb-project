@@ -4,6 +4,8 @@ import Link from "next/link";
 import Logo from "@/assets/svg/logo/Logo.svg";
 import TextLogo from "@/assets/svg/logo/TextLogo.svg";
 import palette from "styles/palette";
+import SignUpModal from "@/components/SignUpModal";
+import useModal from "@/hooks/useModal";
 
 const Container = styled.div`
   background-color: white;
@@ -55,23 +57,6 @@ const Container = styled.div`
 
   /* Modal */
   .modal-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    .modal-background {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.75);
-      z-index: 10;
-    }
-
     .modal-contents {
       width: 400px;
       height: 400px;
@@ -81,8 +66,8 @@ const Container = styled.div`
   }
 `;
 const Header: React.FC = () => {
-  // modal state
-  const [openModal, setOpenModal] = useState(false);
+  // 모달 value 가져오기
+  const { openModal, ModalPortal } = useModal();
 
   return (
     <Container>
@@ -93,24 +78,15 @@ const Header: React.FC = () => {
         </a>
       </Link>
       <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button" onClick={() => setOpenModal((prev) => !prev)}>
+        <button type="button" className="header-sign-up-button" onClick={openModal}>
           회원가입
         </button>
         <button className="header-login-button">로그인</button>
       </div>
-      {/* Modal */}
-      {openModal && (
-        <div className="modal-wrapper">
-          <div
-            className="modal-background"
-            role="presentation"
-            onClick={() => {
-              setOpenModal((prev) => !prev);
-            }}
-          />
-          <div className="modal-contents" />
-        </div>
-      )}
+      {/* Modal 출력 */}
+      <ModalPortal>
+        <SignUpModal />
+      </ModalPortal>
     </Container>
   );
 };

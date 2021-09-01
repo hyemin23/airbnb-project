@@ -20,6 +20,7 @@
   "homepage": "https://github.com/hyemin23/airbnb-project#readme",
   "dependencies": {
     "@types/react": "^17.0.19",
+    "@types/react-dom": "^17.0.9",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.13.2",
