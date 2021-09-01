@@ -21,7 +21,8 @@
     "@/components/*": ["components/*"],
     "@/hooks/*": ["hooks/*"],
     "@/assets/*": ["public/static/*"],
-    "@/images/*":["images/*"]
+    "@/images/*":["images/*"],
+    "@/types/*" : ["types/*"]
   },
 },
   "include": [

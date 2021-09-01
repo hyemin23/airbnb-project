@@ -9,6 +9,7 @@ import Input from "./common/Input";
 import Selector from "./common/Selector";
 import { dayList, monthList, yearList } from "lib/staticData";
 import Button from "./common/Button";
+import { signupAPI } from "lib/api/auth";
 
 const Container = styled.form`
   width: 568px;
@@ -134,8 +135,26 @@ const SignUpModal: React.FC = () => {
     setHidePassword(!hidePassword);
   }, [hidePassword]);
 
+  const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    //   회원가입 폼 제출하기
+    try {
+      const signUpBody = {
+        email,
+        firstname,
+        lastname,
+        password,
+        birthday: new Date(`${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`).toISOString(),
+      };
+      await signupAPI(signUpBody);
+    } catch (error) {
+      console.dir(error);
+    }
+  };
+
   return (
-    <Container>
+    <Container onSubmit={onSubmitSignUp}>
       <CloseIcon className="modal-close-x-icon" />
       <div className="input-wrapper">
         <Input
