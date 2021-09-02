@@ -1,6 +1,7 @@
 import React from "react";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import GlobalStyle from "../styles/GlobalStyle";
+import { wrapper } from "store";
 
 const app = ({ Component, pageProps }: AppProps) => {
   return (
@@ -15,4 +16,4 @@ const app = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default app;
+export default wrapper.withRedux(app);

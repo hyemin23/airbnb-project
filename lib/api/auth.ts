@@ -16,5 +16,5 @@ interface SignUpAPIBody {
 export const signupAPI = (body: SignUpAPIBody) => {
   // 여기서 pages/api/auth 컨트롤러로 넘어감(2단계)
   // request : signupapibody 형태 axios response : userType형태
-  axios.post<UserType>("/api/auth/signup", body);
+  return axios.post<UserType>("/api/auth/signup", body);
 };
