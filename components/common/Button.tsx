@@ -23,4 +23,5 @@ const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
   return <Container {...props}>{children}</Container>;
 };
 
-export default Button;
+// 공통 컴포넌트 최적화
+export default React.memo(Button);

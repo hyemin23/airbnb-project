@@ -68,4 +68,5 @@ const Selector: React.FC<IProps> = ({ options = [], disabledOptions = [], isVali
   );
 };
 
-export default Selector;
+// 공통 컴포넌트 props 최적화
+export default React.memo(Selector);

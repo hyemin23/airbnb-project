@@ -99,4 +99,5 @@ const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, 
   );
 };
 
-export default Input;
+// 공통 컴포넌트에는 props의 값들이 자주 변경됨. props의 값이 같다면 리렌더 방지
+export default React.memo(Input);
