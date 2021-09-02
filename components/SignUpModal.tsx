@@ -81,6 +81,10 @@ interface IProps {
 }
 // 리렌더링 방지
 const PASSWORD_MIN_LENGTH = 8;
+const disabledYear = ["년"];
+const disabledMonth = ["월"];
+const disabledDay = ["일"];
+
 const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
   const dispatch = useDispatch();
 
@@ -321,7 +325,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-year-selector">
           <Selector
             options={yearList}
-            disabledOptions={["년"]}
+            disabledOptions={disabledYear}
             defaultValue="년"
             onChange={onChangeBirthYear}
             isValid={!!birthYear}
@@ -330,7 +334,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-month-selector">
           <Selector
             options={monthList}
-            disabledOptions={["월"]}
+            disabledOptions={disabledMonth}
             defaultValue="월"
             onChange={onChangeBirthMonth}
             isValid={!!birthMonth}
@@ -339,7 +343,7 @@ const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
         <div className="sign-up-modal-birthday-day-selector">
           <Selector
             options={dayList}
-            disabledOptions={["일"]}
+            disabledOptions={disabledDay}
             defaultValue="일"
             onChange={onChangeBirthDay}
             isValid={!!birthDay}
