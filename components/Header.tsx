@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import Logo from "@/assets/svg/logo/Logo.svg";
 import TextLogo from "@/assets/svg/logo/TextLogo.svg";
 import palette from "styles/palette";
-import useModal from "@/hooks/useModal";
 import { useSelector } from "../store";
-import HamburgerIcon from "@/assets/svg/Icon/HamburgerIcon.svg";
-import { useDispatch } from "react-redux";
-import { authAction } from "@/store/auth";
-import AuthModal from "./auth/AuthModal";
-import OutsideClickHandler from "react-outside-click-handler";
-import { logoutAPI } from "lib/api/auth";
-import { userAction } from "@/store/user";
 import HeaderAuths from "./HeaderAuths";
+import HeaderUserProfile from "./HeaderUserProfile";
+
 const Container = styled.div`
   background-color: white;
   position: sticky;
@@ -103,20 +97,12 @@ const Container = styled.div`
     }
   }
 `;
-const Header: React.FC = () => {
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const [isUsermenuOpen, setIsUsermenuOpen] = useState(false);
 
-  const logOut = async () => {
-    try {
-      // 토큰 지우고 store 초기화
-      await logoutAPI();
-      dispatch(userAction.initUser());
-    } catch (e) {
-      console.dir(e);
-    }
-  };
+const Header: React.FC = () => {
+  // user객체는 useSelector로 불러오게되면 객체의 주소를 비교하므로 유저 정보가 변경되어 user가 변경된다면 객체가 새로 만들어져 user객체를 불러온 컴포넌트는 전부 리렌더링 됨.
+  // userProfileImage 처럼 원시 타입으로 사용하면 방지할 수 있음.
+  // const user = useSelector((state) => state.user);
+  const isLogged = useSelector((state) => state.user.isLogged);
 
   return (
     <Container>
@@ -126,42 +112,9 @@ const Header: React.FC = () => {
           <TextLogo />
         </a>
       </Link>
-      {!user.isLogged && <HeaderAuths />}
-
+      {!isLogged && <HeaderAuths />}
       {/* outsideclickhandler 적용 */}
-      {user.isLogged && (
-        <OutsideClickHandler
-          onOutsideClick={() => {
-            if (isUsermenuOpen) {
-              setIsUsermenuOpen(false);
-            }
-          }}
-        >
-          <button className="header-user-profile" type="button" onClick={() => setIsUsermenuOpen((prev) => !prev)}>
-            <HamburgerIcon />
-            <img src={user.profileImage} className="header-user-profile-image" alt="" />
-          </button>
-          {isUsermenuOpen && (
-            <ul className="header-usermenu">
-              <li>숙소관리</li>
-              <Link href="/room/register/building">
-                <a
-                  role="presentation"
-                  onClick={() => {
-                    setIsUsermenuOpen(false);
-                  }}
-                >
-                  <li>숙소 등록하기</li>
-                </a>
-              </Link>
-              <div className="header-usermenu-divider" />
-              <li role="presentation" onClick={logOut}>
-                로그아웃
-              </li>
-            </ul>
-          )}
-        </OutsideClickHandler>
-      )}
+      {isLogged && <HeaderUserProfile />}
     </Container>
   );
 };
