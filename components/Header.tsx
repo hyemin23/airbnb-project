@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { authAction } from "@/store/auth";
 import AuthModal from "./auth/AuthModal";
 import OutsideClickHandler from "react-outside-click-handler";
+import { logoutAPI } from "lib/api/auth";
+import { userAction } from "@/store/user";
 const Container = styled.div`
   background-color: white;
   position: sticky;
@@ -134,6 +136,16 @@ const Header: React.FC = () => {
   const dispatch = useDispatch();
   const [isUsermenuOpen, setIsUsermenuOpen] = useState(false);
 
+  const logOut = async () => {
+    try {
+      // 토큰 지우고 store 초기화
+      await logoutAPI();
+      dispatch(userAction.initUser());
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+
   return (
     <Container>
       <Link href="/">
@@ -193,7 +205,7 @@ const Header: React.FC = () => {
                 </a>
               </Link>
               <div className="header-usermenu-divider" />
-              <li role="presentation" onClick={() => {}}>
+              <li role="presentation" onClick={logOut}>
                 로그아웃
               </li>
             </ul>

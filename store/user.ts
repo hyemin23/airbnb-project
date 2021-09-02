@@ -24,6 +24,12 @@ const user = createSlice({
       state = { ...action.payload, isLogged: true };
       return state;
     },
+    // * 로그아웃
+    initUser(state) {
+      // 초기화
+      state = initialState;
+      return state;
+    },
   },
 });
 

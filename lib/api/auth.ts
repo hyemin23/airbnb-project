@@ -3,7 +3,7 @@
 import axios from "axios";
 import { UserType } from "@/types/user";
 
-// 회원가입 body
+//* 회원가입 body
 interface SignUpAPIBody {
   email: string;
   firstname: string;
@@ -12,17 +12,20 @@ interface SignUpAPIBody {
   birthday: string;
 }
 
-// 회원가입 api
+//* 회원가입 api
 export const signupAPI = (body: SignUpAPIBody) => {
   // 여기서 pages/api/auth 컨트롤러로 넘어감(2단계)
   // request : signupapibody 형태 axios response : userType형태
   return axios.post<UserType>("/api/auth/signup", body);
 };
 
-// 로그인 api
+//* 로그인 api
 export const loginAPI = (body: { email: string; password: string }) => {
   return axios.post<UserType>("/api/auth/login", body);
 };
 
 //* cookie의 access_token의 유저 정보를 받아오는 api
 export const meAPI = () => axios.get<UserType>("/api/auth/loadMyData");
+
+//* 로그아웃 api
+export const logoutAPI = () => axios.delete("/api/auth/logout");

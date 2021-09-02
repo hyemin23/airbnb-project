@@ -100,7 +100,7 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     }
   };
 
-  // validateMode 꺼주기
+  //컴포넌트가 사라질 때 validateMode 꺼주기
   useEffect(() => {
     return () => {
       setValidateMode(false);
