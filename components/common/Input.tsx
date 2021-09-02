@@ -1,9 +1,16 @@
 import React from "react";
-import styled from "styled-components";
+import { useSelector } from "@/store/index";
+import styled, { css } from "styled-components";
 import palette from "styles/palette";
+import useValidateMode from "@/hooks/useValidateMode";
 
+type InputContainerProps = {
+  iconExist: boolean;
+  isValid: boolean;
+  useValidation: boolean;
+};
 // 제네릭을 사용하여 props에 타입 추가
-const Container = styled.div<{ iconExist: boolean }>`
+const Container = styled.div<InputContainerProps>`
   input {
     position: relative;
     width: 100%;
@@ -30,19 +37,64 @@ const Container = styled.div<{ iconExist: boolean }>`
     display: flex;
     align-items: center;
   }
+
+  svg {
+    position: absolute;
+    right: 11px;
+    height: 46px;
+  }
+  .input-error-message {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    color: ${palette.tawny};
+  }
+
+  ${({ useValidation, isValid }) =>
+    useValidation &&
+    !isValid &&
+    css`
+      input {
+        background-color: ${palette.snow};
+        border-color: ${palette.orange}
+        &:focus{
+          border-color: ${palette.orange}
+        }
+      };
+  `}
+
+  ${({ useValidation, isValid }) =>
+    useValidation &&
+    !isValid &&
+    css`
+      input {
+        background-color: ${palette.dark_cyan};
+      }
+    `}
 `;
 
 // <input>태그가 가지는 속성들에 대한 type extends를 통해 IProps는 input태그가 갖고 있는 속성을 확장하여 사용
 interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: JSX.Element; //type이 JSX 엘리먼트(JSX 문법)인 icon 값
+  isValid?: boolean;
+  useValidation?: boolean;
+  errorMessage?: string;
 }
 
 // ...props -> 나머지 속성 값
-const Input: React.FC<IProps> = ({ icon, ...props }) => {
+const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, errorMessage, ...props }) => {
+  // validateMode는 useState에서 redux 값으로 변경하여 사용
+  // 현재 state에서 값 가져오기 (commonActions.setValidateMode로 변경 가능)
+  // hooks로 가져오기
+  const { validateMode } = useValidateMode();
+
   return (
-    <Container iconExist={!!icon}>
+    <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
       <input {...props} />
       <div className="input-icon-wrapper">{icon}</div>
+      {useValidation && validateMode && !isValid && errorMessage && (
+        <p className="input-error-message">{errorMessage}</p>
+      )}
     </Container>
   );
 };

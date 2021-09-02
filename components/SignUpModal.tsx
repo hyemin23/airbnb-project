@@ -12,6 +12,7 @@ import Button from "./common/Button";
 import { signupAPI } from "lib/api/auth";
 import { useDispatch } from "react-redux";
 import { userAction } from "store/user";
+import useValidateMode from "@/hooks/useValidateMode";
 
 const Container = styled.form`
   width: 568px;
@@ -66,6 +67,8 @@ type Inputs = {
 };
 
 const SignUpModal: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
@@ -77,8 +80,8 @@ const SignUpModal: React.FC = () => {
   const [birthDay, setBirthDay] = useState<string | undefined>();
   const [birthMonth, setBirthMonth] = useState<string | undefined>();
 
-  // dispatch
-  const dispatch = useDispatch();
+  // validateMode Hooks 가져오기
+  const { setValidateMode } = useValidateMode();
 
   //* 생년월일 월 변경시
   const onChangeBirthMonth = useCallback(
@@ -144,6 +147,13 @@ const SignUpModal: React.FC = () => {
   const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // state값 변경 기본 값 : false
+    setValidateMode(true);
+
+    if (!email || !lastname || !firstname || !password || !birthYear || !birthMonth || !birthDay) {
+      return undefined;
+    }
+
     try {
       const signUpBody = {
         email,
@@ -171,13 +181,32 @@ const SignUpModal: React.FC = () => {
           icon={<MailIcon />}
           value={email}
           onChange={onChangeEmail}
+          useValidation
+          isValid={!!email}
+          errorMessage="이메일이 필요합니다"
         />
       </div>
       <div className="input-wrapper">
-        <Input placeholder="성 (예:박)" icon={<PersonIcon />} value={firstname} onChange={onChangeFirstname} />
+        <Input
+          placeholder="성 (예:박)"
+          icon={<PersonIcon />}
+          value={firstname}
+          onChange={onChangeFirstname}
+          useValidation
+          isValid={!!firstname}
+          errorMessage="성을 입력하세요."
+        />
       </div>
       <div className="input-wrapper">
-        <Input placeholder="이름 (예:혜민)" icon={<PersonIcon />} value={lastname} onChange={onChangeLastname} />
+        <Input
+          placeholder="이름 (예:혜민)"
+          icon={<PersonIcon />}
+          value={lastname}
+          onChange={onChangeLastname}
+          useValidation
+          isValid={!!lastname}
+          errorMessage="이름을 입력하세요."
+        />
       </div>
 
       <div className="input-wrapper sign-up-password-input-wrapper">
@@ -193,6 +222,9 @@ const SignUpModal: React.FC = () => {
           }
           value={password}
           onChange={onChangePassword}
+          useValidation
+          isValid={!!password}
+          errorMessage="비밀번호를 입력하세요."
         />
       </div>
       <p className="sign-up-birthday-label">생일</p>

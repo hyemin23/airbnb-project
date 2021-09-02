@@ -22,7 +22,9 @@
     "@/hooks/*": ["hooks/*"],
     "@/assets/*": ["public/static/*"],
     "@/images/*":["images/*"],
-    "@/types/*" : ["types/*"]
+    "@/types/*" : ["types/*"],
+    "@/store/*" : ["store/*"],
+
   },
 },
   "include": [

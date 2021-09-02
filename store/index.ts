@@ -4,9 +4,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Context, createWrapper, HYDRATE, MakeStore } from "next-redux-wrapper";
 import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
 import { combineReducers, createStore } from "redux";
+import common from "./common";
 import user from "./user";
 
+// 리듀서 묶기
 const rootReducer = combineReducers({
+  common: common.reducer,
   user: user.reducer,
 });
 
@@ -29,12 +32,7 @@ const reducer = (state: any, action: any) => {
 };
 
 // * type 지원되는 custom useSelector
-
 export const useSelector: TypedUseSelectorHook<RootState> = useReduxSelector;
-
-// store 생성
-// create a makeStore function
-// const makeStore = (context: Context) => createStore(reducer);
 
 const initStore = () => {
   const store = configureStore({
@@ -44,14 +42,5 @@ const initStore = () => {
   initialRootState = store.getState();
   return store;
 };
-
-// const initStore: makeStore = () => {
-//   const store = configureStore({
-//     reducer,
-//     devTools: true,
-//   });
-//   initialRootState = store.getState();
-//   return store;
-// };
 
 export const wrapper = createWrapper(initStore);
