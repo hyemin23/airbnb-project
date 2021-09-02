@@ -13,6 +13,7 @@ import AuthModal from "./auth/AuthModal";
 import OutsideClickHandler from "react-outside-click-handler";
 import { logoutAPI } from "lib/api/auth";
 import { userAction } from "@/store/user";
+import HeaderAuths from "./HeaderAuths";
 const Container = styled.div`
   background-color: white;
   position: sticky;
@@ -32,32 +33,6 @@ const Container = styled.div`
 
     .header-logo {
       margin-right: 6px;
-    }
-  }
-
-  /* Login button & Join Button */
-  .header-auth-buttons {
-    button {
-      height: 40px;
-      padding: 0 16px;
-      border: 0;
-      border-radius: 21px;
-      background-color: white;
-      cursor: pointer;
-      outline: none;
-    }
-    .header-sign-up-button {
-      margin-right: 8px;
-      &:hover {
-        background-color: ${palette.gray_f7};
-      }
-    }
-  }
-
-  .header-login-button {
-    box-shadow: 0px 1px 2px rgb(0, 0, 0, 0.18);
-    &:hover {
-      box-shadow: 0px 2px 8px rgb(0, 0, 0, 0.12);
     }
   }
 
@@ -129,10 +104,7 @@ const Container = styled.div`
   }
 `;
 const Header: React.FC = () => {
-  // 모달 value 가져오기
-  const { openModal, ModalPortal, closeModal } = useModal();
   const user = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   const [isUsermenuOpen, setIsUsermenuOpen] = useState(false);
 
@@ -154,29 +126,7 @@ const Header: React.FC = () => {
           <TextLogo />
         </a>
       </Link>
-      {!user.isLogged && (
-        <div className="header-auth-buttons">
-          <button
-            type="button"
-            className="header-sign-up-button"
-            onClick={() => {
-              dispatch(authAction.setAuthMode("signup"));
-              openModal();
-            }}
-          >
-            회원가입
-          </button>
-          <button
-            className="header-login-button"
-            onClick={() => {
-              dispatch(authAction.setAuthMode("login"));
-              openModal();
-            }}
-          >
-            로그인
-          </button>
-        </div>
-      )}
+      {!user.isLogged && <HeaderAuths />}
 
       {/* outsideclickhandler 적용 */}
       {user.isLogged && (
@@ -212,11 +162,6 @@ const Header: React.FC = () => {
           )}
         </OutsideClickHandler>
       )}
-      {/* Modal 출력 */}
-      <ModalPortal>
-        {/* SignUpModal -> AuthModal 변경 auth값에 따라 회원가입과 로그인 모달을 띄우게 해주는 역할 */}
-        <AuthModal closeModal={closeModal} />
-      </ModalPortal>
     </Container>
   );
 };
