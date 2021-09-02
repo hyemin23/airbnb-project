@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import CloseIcon from "@/assets/svg/Icon/CloseIcon.svg";
 import MailIcon from "@/assets/svg/Icon/mail.svg";
@@ -14,6 +14,8 @@ import { useDispatch } from "react-redux";
 import { userAction } from "store/user";
 import useValidateMode from "@/hooks/useValidateMode";
 import PasswordWarning from "./auth/PasswordWarning";
+import palette from "styles/palette";
+import { authAction } from "@/store/auth";
 
 const Container = styled.form`
   width: 568px;
@@ -60,11 +62,26 @@ const Container = styled.form`
       flex-grow: 1;
     }
   }
+
+  .sign-up-modal-submit-button-wrapper {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid ${palette.gray_eb};
+  }
+
+  .sign-up-modal-set-login {
+    color: ${palette.dark_cyan};
+    margin-left: 10px;
+    cursor: pointer;
+  }
 `;
 
+interface IProps {
+  closeModal: () => void;
+}
 // 리렌더링 방지
 const PASSWORD_MIN_LENGTH = 8;
-const SignUpModal: React.FC = () => {
+const SignUpModal: React.FC<IProps> = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -210,13 +227,25 @@ const SignUpModal: React.FC = () => {
         // 가입 정보 받아오기 password 제거된 상태로
         const { data } = await signupAPI(signUpBody);
         dispatch(userAction.setLoggedUser(data));
-
-        console.log("가입 data : ", data);
+        closeModal();
       } catch (error) {
         console.dir(error);
       }
     }
   };
+
+  // * 로그인 모달로 변경
+  const onChangeLoginModal = () => {
+    dispatch(authAction.setAuthMode("login"));
+  };
+
+  //언마운트시(컴포넌트가 사라질 때)
+  // validateMode꺼주기
+  useEffect(() => {
+    return () => {
+      setValidateMode(false);
+    };
+  }, []);
 
   return (
     <Container onSubmit={onSubmitSignUp}>
@@ -321,6 +350,12 @@ const SignUpModal: React.FC = () => {
       <div className="sign-up-modal-submit-button-wrapper">
         <Button type="submit">가입하기</Button>
       </div>
+      <p>
+        이미 에어비앤비 계정이 있나요?
+        <span className="sign-up-modal-set-login" role="presentation" onClick={onChangeLoginModal}>
+          로그인
+        </span>
+      </p>
     </Container>
   );
 };
