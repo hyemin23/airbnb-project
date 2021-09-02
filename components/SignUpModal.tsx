@@ -62,11 +62,6 @@ const Container = styled.form`
   }
 `;
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
-};
-
 // 리렌더링 방지
 const PASSWORD_MIN_LENGTH = 8;
 const SignUpModal: React.FC = () => {
@@ -171,6 +166,26 @@ const SignUpModal: React.FC = () => {
     setHidePassword(!hidePassword);
   }, [hidePassword]);
 
+  // * 회원가입 폼 입력 값 확인
+  const validateSignUpFrom = () => {
+    if (!email || !lastname || !firstname || !password) {
+      return false;
+    }
+
+    // 비밀번호 체크
+    if (isPasswordHasNumverOrSymbol && isPasswordHasNameOrEmail && !isPasswordOverMinLength) {
+      return false;
+    }
+
+    // 생년월일 셀렉터 값 체크
+    if (!birthYear || !birthMonth || !birthDay) {
+      return false;
+    }
+
+    // 모든 조건이 만족하면 true
+    return true;
+  };
+
   //* 회원가입 폼 제출하기
   const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -178,23 +193,28 @@ const SignUpModal: React.FC = () => {
     // state값 변경 기본 값 : false
     setValidateMode(true);
 
-    if (!email || !lastname || !firstname || !password || !birthYear || !birthMonth || !birthDay) {
-      return undefined;
-    }
+    console.log("가입 조건 확인 : ", validateSignUpFrom());
 
-    try {
-      const signUpBody = {
-        email,
-        firstname,
-        lastname,
-        password,
-        birthday: new Date(`${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`).toISOString(),
-      };
-      const { data } = await signupAPI(signUpBody);
+    // 가입 조건 확인
+    if (validateSignUpFrom()) {
+      // 가입 시도
+      try {
+        const signUpBody = {
+          email,
+          firstname,
+          lastname,
+          password,
+          birthday: new Date(`${birthYear}-${birthMonth!.replace("월", "")}-${birthDay}`).toISOString(),
+        };
 
-      dispatch(userAction.setLoggedUser(data));
-    } catch (error) {
-      console.dir(error);
+        // 가입 정보 받아오기 password 제거된 상태로
+        const { data } = await signupAPI(signUpBody);
+        dispatch(userAction.setLoggedUser(data));
+
+        console.log("가입 data : ", data);
+      } catch (error) {
+        console.dir(error);
+      }
     }
   };
 
@@ -270,13 +290,31 @@ const SignUpModal: React.FC = () => {
 
       <div className="sign-up-modal-birhday-selectors">
         <div className="sign-up-modal-birthday-year-selector">
-          <Selector options={yearList} disabledOptions={["년"]} defaultValue="년" onChange={onChangeBirthYear} />
+          <Selector
+            options={yearList}
+            disabledOptions={["년"]}
+            defaultValue="년"
+            onChange={onChangeBirthYear}
+            isValid={!!birthYear}
+          />
         </div>
         <div className="sign-up-modal-birthday-month-selector">
-          <Selector options={monthList} disabledOptions={["월"]} defaultValue="월" onChange={onChangeBirthMonth} />
+          <Selector
+            options={monthList}
+            disabledOptions={["월"]}
+            defaultValue="월"
+            onChange={onChangeBirthMonth}
+            isValid={!!birthMonth}
+          />
         </div>
         <div className="sign-up-modal-birthday-day-selector">
-          <Selector options={dayList} disabledOptions={["일"]} defaultValue="일" onChange={onChangeBirthDay} />
+          <Selector
+            options={dayList}
+            disabledOptions={["일"]}
+            defaultValue="일"
+            onChange={onChangeBirthDay}
+            isValid={!!birthDay}
+          />
         </div>
       </div>
 
