@@ -38,11 +38,11 @@ const Container = styled.div<InputContainerProps>`
     align-items: center;
   }
 
-  svg {
+  /* svg {
     position: absolute;
     right: 11px;
     height: 46px;
-  }
+  } */
   .input-error-message {
     margin-top: 8px;
     font-weight: 600;

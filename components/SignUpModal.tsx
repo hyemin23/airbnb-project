@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import CloseIcon from "@/assets/svg/Icon/CloseIcon.svg";
 import MailIcon from "@/assets/svg/Icon/mail.svg";
@@ -13,6 +13,7 @@ import { signupAPI } from "lib/api/auth";
 import { useDispatch } from "react-redux";
 import { userAction } from "store/user";
 import useValidateMode from "@/hooks/useValidateMode";
+import PasswordWarning from "./auth/PasswordWarning";
 
 const Container = styled.form`
   width: 568px;
@@ -66,6 +67,8 @@ type Inputs = {
   exampleRequired: string;
 };
 
+// 리렌더링 방지
+const PASSWORD_MIN_LENGTH = 8;
 const SignUpModal: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -139,6 +142,31 @@ const SignUpModal: React.FC = () => {
     [password],
   );
 
+  // * 비밀번호 validation
+  const [passwordFocused, setPasswordFocuesd] = useState(false);
+
+  // * 비밀번호 focus 시
+  const onFocusPassword = useCallback(() => {
+    setPasswordFocuesd(true);
+  }, []);
+
+  // * 비밀번호 확인 조건 1
+  // 패스워드가 이름이나 이메일을 포함하는지
+  const isPasswordHasNameOrEmail = useMemo(
+    () => !password || !lastname || password.includes(lastname) || password.includes(email.split("@")[0]),
+    [password, lastname, email],
+  );
+
+  // * 비밀번호 확인 조건2
+  // 8자리 이상인지
+  const isPasswordOverMinLength = useMemo(() => !!password && password.length >= PASSWORD_MIN_LENGTH, [password]);
+
+  // * 비밀번호 확인 조건3
+  // 숫자나 특수 기호를 포함하는지 (특수문자)
+  const isPasswordHasNumverOrSymbol = useMemo(
+    () => !(/[{}[\]/?.,;:|)*~`!^\-_+<>@#$%&\\=('"]/g.test(password) || /[0-9]/g.test(password)),
+    [password],
+  );
   const toggleHidePassword = useCallback(() => {
     setHidePassword(!hidePassword);
   }, [hidePassword]);
@@ -223,9 +251,20 @@ const SignUpModal: React.FC = () => {
           value={password}
           onChange={onChangePassword}
           useValidation
-          isValid={!!password}
+          isValid={!isPasswordHasNameOrEmail && isPasswordOverMinLength && !isPasswordHasNumverOrSymbol}
           errorMessage="비밀번호를 입력하세요."
+          onFocus={onFocusPassword}
         />
+        {passwordFocused && (
+          <>
+            <PasswordWarning
+              isValid={isPasswordHasNameOrEmail}
+              text="비밀번호에 본인 이름이나 이메일 주소를 포함할 수 없습니다"
+            />
+            <PasswordWarning isValid={!isPasswordOverMinLength} text="최소 8자" />
+            <PasswordWarning isValid={isPasswordHasNumverOrSymbol} text="숫자나 기호를 포함하세요." />
+          </>
+        )}
       </div>
       <p className="sign-up-birthday-label">생일</p>
 
