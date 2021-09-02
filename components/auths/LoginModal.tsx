@@ -10,6 +10,8 @@ import CloseIcon from "@/assets/svg/Icon/CloseIcon.svg";
 import MailIcon from "@/assets/svg/Icon/mail.svg";
 import ClosedPassword from "@/assets/svg/Icon/hidepassword.svg";
 import OpenedEyeIcon from "@/assets/svg/Icon/showpassword.svg";
+import { loginAPI } from "lib/api/auth";
+import { userAction } from "@/store/user";
 const Container = styled.form`
   width: 568px;
   padding: 32px;
@@ -86,16 +88,19 @@ const LoginModal: React.FC<IProps> = ({ closeModal }) => {
     } else {
       const loginBody = { email, password };
 
-      //   try {
-      // const { data } = await loginAPI(loginBody);
-      // dispatch(userAction.setLoggedUser(data));
-      // closeModal();
-      //   } catch (e) {
-      // console.log(e);
-      //   }
+      try {
+        const { data } = await loginAPI(loginBody);
+        console.log("로그인 data", data);
+
+        dispatch(userAction.setLoggedUser(data));
+        closeModal();
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
+  // validateMode 꺼주기
   useEffect(() => {
     return () => {
       setValidateMode(false);
