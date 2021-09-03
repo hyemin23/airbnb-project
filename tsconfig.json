@@ -24,6 +24,8 @@
     "@/images/*":["images/*"],
     "@/types/*" : ["types/*"],
     "@/store/*" : ["store/*"],
+    "@/common/*" : ["components/common/*"],
+    "@/lib/*" : ["lib/*"]
 
   },
 },

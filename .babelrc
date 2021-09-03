@@ -13,7 +13,7 @@
           "@/containers": "./containers",
           "@/data": "./data",
           "@/hooks": "./hooks",
-          "@/lib*": "./lib",
+          "@/lib": "./lib",
           "@/pages*": "./pages*",
           "@/assets": "./public/static",
           "@/reducers": "./reducers",
@@ -21,7 +21,9 @@
           "@/store": "./store",
           "@/styles": "./styles",
           "@/types": "./types",
-          "@/utils": "./utils"
+          "@/utils": "./utils",
+          "@/common" : "./components/common/"
+
         }
       }
     ]
