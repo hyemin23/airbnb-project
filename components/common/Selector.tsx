@@ -58,21 +58,18 @@ const RegisterSelectorStyle = css`
 `;
 
 // 스타일 Props 설정
+
 interface SelectorContainerProps {
   isValid: boolean;
   validateMode: boolean;
   type: "register" | "normal";
 }
-
 const Container = styled.div<SelectorContainerProps>`
   ${({ type }) => type === "normal" && normalSelectorStyle};
   ${({ type }) => type === "register" && RegisterSelectorStyle};
 
-  width: 100%;
-  height: 46px;
-
   select {
-    ${({ isValid, validateMode }) => {
+    ${({ validateMode, isValid }) => {
       if (validateMode) {
         if (!isValid) {
           return css`
@@ -89,39 +86,26 @@ const Container = styled.div<SelectorContainerProps>`
 
     &:disabled {
       background-image: url("/static/svg/Icon/disabled_register_selector_down_arrow.svg");
-      border-color: ${palette.gray_e5};
       background-color: ${palette.gray_f7};
+      border-color: ${palette.gray_e5};
       color: ${palette.gray_e5};
       cursor: not-allowed;
     }
+  }
 
-    .selector-wargin {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-    }
+  .selector-warning {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
 
     svg {
       margin-right: 4px;
     }
-
     p {
       font-size: 12px;
       color: ${palette.davidson_orange};
     }
   }
-
-  ${({ isValid, validateMode }) =>
-    validateMode &&
-    css`
-      select {
-        border-color: ${isValid ? palette.dark_cyan : palette.tawny}!important;
-
-        background-color: ${isValid ? "white" : palette.snow};
-      };
-      
-      }
-    `};
 `;
 
 interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {

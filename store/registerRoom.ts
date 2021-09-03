@@ -5,7 +5,7 @@ type RegisterRoomState = {
   largeBuildingType: string | null;
   buildingType: string | null;
   roomType: string | null;
-  isSetUpForGuest: string | null;
+  isSetUpForGuest: boolean | null;
 };
 
 // * 초기 상태
@@ -38,6 +38,16 @@ const registerRoom = createSlice({
         state.buildingType = null;
       }
       state.buildingType = action.payload;
+      return state;
+    },
+    // 숙소 유형 변경하기
+    setRoomType(state, action: PayloadAction<"entire" | "private" | "public">) {
+      state.roomType = action.payload;
+      return state;
+    },
+    // 게스트 유형의 숙소인지 확인
+    setIsSetUpForGuest(state, action: PayloadAction<boolean>) {
+      state.isSetUpForGuest = action.payload;
       return state;
     },
   },
