@@ -1,3 +1,4 @@
+import { BedType } from "./../types/room.d";
 // 정적 data
 
 // 월
@@ -11,6 +12,9 @@ let date = new Date();
 const year = date.getFullYear();
 export const yearList = Array.from(Array(121), (_, i) => String(year - i));
 
+// 침실 개수와 침대 개수를 변경할 수 있도록 만들어줌
+// 침대의 최대 수량은 15개, 침실개수
+export const bedroomCountList = Array.from(Array(16), (_, i) => `침실${i}개`);
 // 큰 범위 건물 유형 옵션
 export const largeBuildingTypeList = ["아파트", "주택", "별채", "톡특한 숙소", "B&B", "부티크호텔"];
 
@@ -105,25 +109,22 @@ export const boutiquesHotelBuildingTypeList = [
   "객잔(중국)",
 ];
 
-//* 침실 개수
-export const bedroomCountList = Array.from(Array(16), (_, i) => `침실 ${i}개`);
-
 //* 침대 유형
-// export const bedTypes: BedType[] = [
-//   "다른 침대 추가",
-//   "소파",
-//   "에어 매트릭스",
-//   "요와 이불",
-//   "싱글",
-//   "더블",
-//   "퀸",
-//   "이층 침대",
-//   "바닥용 에어매트릭스",
-//   "유아 침대",
-//   "유아용 침대",
-//   "해먹",
-//   "물침대",
-// ];
+export const bedTypes: BedType[] = [
+  "다른 침대 추가",
+  "소파",
+  "에어 매트릭스",
+  "요와 이불",
+  "싱글",
+  "더블",
+  "퀸",
+  "이층 침대",
+  "바닥용 에어매트릭스",
+  "유아 침대",
+  "유아용 침대",
+  "해먹",
+  "물침대",
+];
 
 //* 국가 리스트
 export const countryList = [
