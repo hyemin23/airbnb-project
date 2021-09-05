@@ -6,8 +6,8 @@ import { useSelector } from "../store";
 import { registerRoomAction } from "@/store/registerRoom";
 import { useDispatch } from "react-redux";
 import { largeBuildingTypeList } from "@/lib/staticData";
-import RadioGroup from "./common/RadioGroup";
-import RegisterRoomFooter from "./register/RegisterRoomFooter";
+import RadioGroup from "@/common/RadioGroup";
+import RegisterRoomFooter from "@/components/room/register/RegisterRoomFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;

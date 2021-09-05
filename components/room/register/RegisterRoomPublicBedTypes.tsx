@@ -43,10 +43,11 @@ const Container = styled.li`
   }
 `;
 
-const RegisterRoomPublicBedTypes = () => {
+const RegisterRoomPublicBedTypes: React.FC = () => {
   const [opened, setOpened] = useState(false);
-  const dispatch = useDispatch();
   const publicBedList = useSelector((state) => state.registerRoom.publicBedList);
+
+  const dispatch = useDispatch();
 
   const totalBedsCount = useMemo(() => {
     let total = 0;

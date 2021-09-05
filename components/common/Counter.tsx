@@ -3,7 +3,6 @@ import styled from "styled-components";
 import palette from "styles/palette";
 import CounterPlus from "@/assets/svg/Icon/counter_plus.svg";
 import CounterMius from "@/assets/svg/Icon/counter_minus.svg";
-
 const Container = styled.div`
   display: flex;
   width: 100%;
@@ -38,8 +37,6 @@ const Container = styled.div`
       outline: none;
       cursor: pointer;
       font-size: 21px;
-
-      /* disable일 경우 */
       &:disabled {
         opacity: 0.3;
         cursor: not-allowed;
