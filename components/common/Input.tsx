@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "@/store/index";
 import styled, { css } from "styled-components";
 import palette from "styles/palette";
 import useValidateMode from "@/hooks/useValidateMode";
@@ -11,6 +10,13 @@ type InputContainerProps = {
 };
 // 제네릭을 사용하여 props에 타입 추가
 const Container = styled.div<InputContainerProps>`
+  label {
+    span {
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+
   input {
     position: relative;
     width: 100%;
@@ -74,10 +80,11 @@ interface IProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isValid?: boolean;
   useValidation?: boolean;
   errorMessage?: string;
+  label?: string;
 }
 
 // ...props -> 나머지 속성 값
-const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, errorMessage, ...props }) => {
+const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, errorMessage, label, ...props }) => {
   // validateMode는 useState에서 redux 값으로 변경하여 사용
   // 현재 state에서 값 가져오기 (commonActions.setValidateMode로 변경 가능)
   // hooks로 가져오기
@@ -85,7 +92,13 @@ const Input: React.FC<IProps> = ({ icon, isValid = false, useValidation = true, 
 
   return (
     <Container iconExist={!!icon} isValid={isValid} useValidation={validateMode && useValidation}>
-      <input {...props} />
+      {label && (
+        <label>
+          <span>{label}</span>
+          <input {...props} />
+        </label>
+      )}
+      {!label && <input {...props} />}
       <div className="input-icon-wrapper">{icon}</div>
       {useValidation && validateMode && !isValid && errorMessage && (
         <p className="input-error-message">{errorMessage}</p>

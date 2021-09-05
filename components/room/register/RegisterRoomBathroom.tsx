@@ -63,7 +63,7 @@ const RegisterRoomBathroom: React.FC = () => {
       />
       <RegisterRoomFooter
         prevHref="/room/register/bedrooms"
-        nextHref="/room/register/loaction"
+        nextHref="/room/register/location"
         isValid={bathroomCount > 0 && !!bathroomType}
       />
     </Contariner>

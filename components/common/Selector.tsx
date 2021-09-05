@@ -137,6 +137,7 @@ const Selector: React.FC<IProps> = ({
       <label>
         {label && <span>{label}</span>}
         <select {...props}>
+          {/* 비활성화 옵션 확인 */}
           {disabledOptions.map((option, index) => (
             <option key={index} value={option} disabled>
               {option}

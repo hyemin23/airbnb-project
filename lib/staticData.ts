@@ -128,7 +128,6 @@ export const bedTypes: BedType[] = [
 
 //* 국가 리스트
 export const countryList = [
-  "국가/지역 선택",
   "가나",
   "가봉",
   "가이아나",

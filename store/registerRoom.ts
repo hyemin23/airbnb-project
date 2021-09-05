@@ -28,6 +28,16 @@ type RegisterRoomState = {
   // 3단계
   bathroomCount: number;
   bathroomType: "private" | "public" | null;
+
+  // 4단계
+  country: string;
+  city: string;
+  district: string;
+  streetAddress: string;
+  detailAddress: string;
+  postcode: string;
+  latitude: number;
+  longitude: number;
 };
 
 // * 초기 상태
@@ -41,7 +51,7 @@ const initialState: RegisterRoomState = {
   // 게스트만을 위해 만들어진 숙소인가
   isSetUpForGuest: null,
 
-  // 2단계
+  // * 2단계
   // 최대 숙박 인원
   maximumGuestCount: 1,
   //침실 개수
@@ -53,10 +63,29 @@ const initialState: RegisterRoomState = {
   // 공용 공간 침대 유형
   publicBedList: [],
 
+  // * 3단계
   // 욕실 개수
   bathroomCount: 1,
   // 욕실 유형
   bathroomType: null,
+
+  // * 4단계
+  // 국가
+  country: "",
+  // 시/도
+  city: "",
+  // 시/군/구
+  district: "",
+  // 도로명 주소
+  streetAddress: "",
+  // 동호수
+  detailAddress: "",
+  // 우편번호
+  postcode: "",
+  // 위도
+  latitude: 0,
+  // 경도
+  longitude: 0,
 };
 
 const registerRoom = createSlice({
@@ -187,6 +216,38 @@ const registerRoom = createSlice({
     setBathroomType(state, action: PayloadAction<"private" | "public">) {
       state.bathroomType = action.payload;
       return state;
+    },
+    //* 국가 변경하기
+    setCountry(state, action: PayloadAction<string>) {
+      state.country = action.payload;
+    },
+    //* 시/도 변경하기
+    setCity(state, action: PayloadAction<string>) {
+      state.city = action.payload;
+    },
+    //* 시/군/구 변경하기
+    setDistrict(state, action: PayloadAction<string>) {
+      state.district = action.payload;
+    },
+    //* 도로명주소 변경하기
+    setStreetAddress(state, action: PayloadAction<string>) {
+      state.streetAddress = action.payload;
+    },
+    //* 동호수 변경하기
+    setDetailAddress(state, action: PayloadAction<string>) {
+      state.detailAddress = action.payload;
+    },
+    //* 우편번호 변경하기
+    setPostcode(state, action: PayloadAction<string>) {
+      state.postcode = action.payload;
+    },
+    //* 위도 변경하기
+    setLatitude(state, action: PayloadAction<number>) {
+      state.latitude = action.payload;
+    },
+    //* 경도 변경하기
+    setLongitude(state, action: PayloadAction<number>) {
+      state.longitude = action.payload;
     },
   },
 });
