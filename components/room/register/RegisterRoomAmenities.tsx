@@ -26,6 +26,7 @@ const Container = styled.div`
     margin-bottom: 24px;
   }
 `;
+
 const RegisterRoomAmenities = () => {
   const dispatch = useDispatch();
   const amentities = useSelector((state) => state.registerRoom.amenities);

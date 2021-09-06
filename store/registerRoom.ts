@@ -38,6 +38,12 @@ type RegisterRoomState = {
   postcode: string;
   latitude: number;
   longitude: number;
+
+  // 5단계
+  amenities: string[];
+
+  // 6단계
+  conveniences: string[];
 };
 
 // * 초기 상태
@@ -86,6 +92,12 @@ const initialState: RegisterRoomState = {
   latitude: 0,
   // 경도
   longitude: 0,
+
+  // * 5단계
+  amenities: [],
+
+  // * 6단계
+  conveniences: [],
 };
 
 const registerRoom = createSlice({
@@ -220,34 +232,52 @@ const registerRoom = createSlice({
     //* 국가 변경하기
     setCountry(state, action: PayloadAction<string>) {
       state.country = action.payload;
+      return state;
     },
     //* 시/도 변경하기
     setCity(state, action: PayloadAction<string>) {
       state.city = action.payload;
+      return state;
     },
     //* 시/군/구 변경하기
     setDistrict(state, action: PayloadAction<string>) {
       state.district = action.payload;
+      return state;
     },
     //* 도로명주소 변경하기
     setStreetAddress(state, action: PayloadAction<string>) {
       state.streetAddress = action.payload;
+      return state;
     },
     //* 동호수 변경하기
     setDetailAddress(state, action: PayloadAction<string>) {
       state.detailAddress = action.payload;
+      return state;
     },
     //* 우편번호 변경하기
     setPostcode(state, action: PayloadAction<string>) {
       state.postcode = action.payload;
+      return state;
     },
     //* 위도 변경하기
     setLatitude(state, action: PayloadAction<number>) {
       state.latitude = action.payload;
+      return state;
     },
     //* 경도 변경하기
     setLongitude(state, action: PayloadAction<number>) {
       state.longitude = action.payload;
+      return state;
+    },
+    // * 편의시설 변경하기
+    setAmentities(state, action: PayloadAction<string[]>) {
+      state.amenities = action.payload;
+      return state;
+    },
+    // * 편의공간 변경하기
+    setConveniences(state, action: PayloadAction<string[]>) {
+      state.conveniences = action.payload;
+      return state;
     },
   },
 });
