@@ -1,5 +1,5 @@
 import Button from "@/components/common/Button";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "styles/palette";
 import NavigationIcon from "@/assets/svg/Icon/navigation.svg";
@@ -9,6 +9,8 @@ import Input from "@/components/common/Input";
 import { useSelector } from "@/store/index";
 import { registerRoomAction } from "@/store/registerRoom";
 import { useDispatch } from "react-redux";
+import { getLocationInfoAPI } from "@/lib/api/map";
+import RegisterRoomFooter from "./RegisterRoomFooter";
 const Container = styled.div`
   padding: 62px 30px 1000px;
   h2 {
@@ -59,7 +61,11 @@ const Container = styled.div`
 `;
 
 const disabledCountryOptions = ["국가/지역 선택"];
+
 const RegisterRoomLoaction: React.FC = () => {
+  // * 현재 주소 불러오기 로딩
+  const [loading, setLoading] = useState(false);
+
   const country = useSelector((state) => state.registerRoom.country);
   const city = useSelector((state) => state.registerRoom.city);
   const district = useSelector((state) => state.registerRoom.district);
@@ -98,18 +104,35 @@ const RegisterRoomLoaction: React.FC = () => {
   };
 
   //* 현재 위치 불러오기 성공 시
-  const onSuccessGetLocation = ({ coords }: any) => {
-    console.log("lat:", coords.latitude);
-    console.log("lon:", coords.longitude);
+  const onSuccessGetLocation = async ({ coords }: any) => {
+    try {
+      const { data: currentLocation } = await getLocationInfoAPI({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      });
+
+      setLoading((prev) => !prev);
+      // * 주소 정보 세팅
+      dispatch(registerRoomAction.setCountry(currentLocation.country));
+      dispatch(registerRoomAction.setCity(currentLocation.city));
+      dispatch(registerRoomAction.setDistrict(currentLocation.district));
+      dispatch(registerRoomAction.setStreetAddress(currentLocation.streetAddress));
+      dispatch(registerRoomAction.setPostcode(currentLocation.postcode));
+      dispatch(registerRoomAction.setLatitude(currentLocation.latitude));
+      dispatch(registerRoomAction.setLongitude(currentLocation.longitude));
+    } catch (e) {
+      console.log(e);
+      setLoading((prev) => !prev);
+    }
   };
 
   // * 현재 위치 사용 클릭 시
   const onClickGetCurrentLocation = () => {
+    setLoading((prev) => !prev);
     // getCurrentPosition은 첫 번째 인자로 성공했을 때 함수를, 두 번재 인자로 실패했을 때의 함수를 받는다.
     // 위치를 불러오는 데 성공했을 때 coords라는 값을 주고, lat,lon값이 현재 위치를 나타낸다.
     navigator.geolocation.getCurrentPosition(onSuccessGetLocation, (e) => {
-      console.log("현재 위치 사용 클릭 시 : ", e);
-      console.log(e);
+      console.log("클릭:", e);
     });
   };
 
@@ -120,7 +143,7 @@ const RegisterRoomLoaction: React.FC = () => {
       <p className="register-room-step-info">정확한 숙소 주소는 게스트가 예약을 완료한 후에만 공개됩니다.</p>
       <div className="register-room-location-button-wrapper">
         <Button color="dark_cyan" colorReverse icon={<NavigationIcon />} onClick={onClickGetCurrentLocation}>
-          현재 위치 사용
+          {loading ? "불러오는 중..." : "현재 위치 사용"}
         </Button>
       </div>
       <div className="register-room-location-country-selector-wrapper">
@@ -146,6 +169,7 @@ const RegisterRoomLoaction: React.FC = () => {
       <div className="register-room-location-postcode">
         <Input label="우편번호" onChange={onChangePostcode} value={postcode} />
       </div>
+      <RegisterRoomFooter prevHref="/room/register/bathroom" nextHref="/room/register/geometry" />
     </Container>
   );
 };
