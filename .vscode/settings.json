@@ -1,4 +1,3 @@
 {
-    "editor.formatOnSave": true,
-    "editor.autoClosingBrackets": "always"
+    "editor.formatOnSave": true
 }
