@@ -7,7 +7,7 @@ import palette from "styles/palette";
 import Counter from "@/common/Counter";
 import Selector from "@/common/Selector";
 import { bedroomCountList } from "@/lib/staticData";
-import { getNumber } from "@/lib/utill";
+import { getNumber } from "@/lib/utils";
 import RegisterRoomFooter from "./RegisterRoomFooter";
 import RegisterRoomBedList from "./RegisterRoomBedList";
 

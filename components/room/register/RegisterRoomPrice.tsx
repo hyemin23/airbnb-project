@@ -1,5 +1,5 @@
 import Input from "@/components/common/Input";
-import { makeMoneyToString } from "@/lib/utill";
+import { makeMoneyToString } from "@/lib/utils";
 import { useSelector } from "@/store/index";
 import { registerRoomAction } from "@/store/registerRoom";
 import React from "react";

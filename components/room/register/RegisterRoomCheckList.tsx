@@ -3,6 +3,8 @@ import { isEmpty } from "lodash";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import RegisterRoomCheckStep from "./RegisterRoomCheckStep";
+import RegisterRoomFooter from "./RegisterRoomFooter";
+import RegisterRoomSubmitFooter from "./RegisterRoomSubmitFooter";
 
 const Container = styled.div`
   padding: 62px 30px 100px;
@@ -132,6 +134,7 @@ const RegisterRoomCheckList: React.FC = () => {
   }, []);
 
   //* 예약 날짜가 채워져 있는지
+  // 마지막 단계
   const isDateActived = useMemo(() => {
     const { startDate, endDate } = registerRoom;
     if (!isPriceActived || !startDate || !endDate) {
@@ -250,6 +253,14 @@ const RegisterRoomCheckList: React.FC = () => {
           inProgress={stepInProgress === "date"}
         />
       </ul>
+      {/* check list footer */}
+      {isDateActived ? (
+        //   마지막 단계까지 완료한 경우
+        <RegisterRoomSubmitFooter />
+      ) : (
+        //   step을 다 채우지 못한 경우 해당 step으로 이동
+        <RegisterRoomFooter prevHref="/room/register/date" nextHref={`/room/register/${stepInProgress}`} />
+      )}
     </Container>
   );
 };
