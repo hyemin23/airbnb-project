@@ -5,7 +5,8 @@ import palette from "styles/palette";
 import BackArrowIcon from "@/assets/svg/Icon/footerBack.svg";
 import Button from "@/common/Button";
 import useValidateMode from "@/hooks/useValidateMode";
-const Container = styled.div`
+
+const Container = styled.footer`
   position: fixed;
   bottom: 0;
   display: flex;
@@ -28,7 +29,6 @@ const Container = styled.div`
     }
   }
 `;
-
 interface IProps {
   prevHref?: string;
   nextHref?: string;
