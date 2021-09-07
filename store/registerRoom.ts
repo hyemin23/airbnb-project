@@ -1,69 +1,8 @@
-import { BedType } from "./../types/room.d";
+import { BedType, RoomType } from "./../types/room.d";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// 선택되기 전의 상태가 있기 때문에 null로 초기값 설정
-type RegisterRoomState = {
-  // 1단계
-  largeBuildingType: string | null;
-  buildingType: string | null;
-  roomType: string | null;
-  isSetUpForGuest: boolean | null;
-
-  // 2단계
-  maximumGuestCount: number;
-  bedroomCount: number;
-  bedCount: number;
-  bedList: {
-    id: number;
-    beds: {
-      type: BedType;
-      count: number;
-    }[];
-  }[];
-  publicBedList: {
-    type: BedType;
-    count: number;
-  }[];
-
-  // 3단계
-  bathroomCount: number;
-  bathroomType: "private" | "public" | null;
-
-  // 4단계
-  country: string;
-  city: string;
-  district: string;
-  streetAddress: string;
-  detailAddress: string;
-  postcode: string;
-  latitude: number;
-  longitude: number;
-
-  // 5단계
-  amenities: string[];
-
-  // 6단계
-  conveniences: string[];
-
-  // 7단계
-  photos: string[];
-
-  // 8단계
-  description: string;
-
-  // 9단계
-  title: string;
-
-  // 10단계
-  price: number;
-
-  // 11단계
-  startDate: string | null;
-  endDate: string | null;
-};
-
 // * 초기 상태
-const initialState: RegisterRoomState = {
+const initialState: RoomType = {
   // 건물 유형 큰 범주
   largeBuildingType: null,
   // 건물 유형
