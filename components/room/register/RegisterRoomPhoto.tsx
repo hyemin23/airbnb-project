@@ -103,7 +103,7 @@ const RegisterRoomPhoto = () => {
       )}
       {!isEmpty(photos) && <RegisterRoomPhotoCardList photos={photos} />}
 
-      <RegisterRoomFooter prevHref="/room/register/conveniences" nextHref="/room/register/" />
+      <RegisterRoomFooter prevHref="/room/register/conveniences" nextHref="/room/register/description" />
     </Container>
   );
 };

@@ -47,6 +47,9 @@ type RegisterRoomState = {
 
   // 7단계
   photos: string[];
+
+  // 8단계
+  description: string;
 };
 
 // * 초기 상태
@@ -102,12 +105,15 @@ const initialState: RegisterRoomState = {
   // * 6단계
   conveniences: [],
 
-  // * 7단계
+  // * 7단계 임시배열로 테스트
   photos: [
-    "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
-    "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
-    "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
+    // "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
+    // "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
+    // "https://bnb-hyemin-bucket.s3.ap-northeast-2.amazonaws.com/preview560__a08c7b24-a3e4-4cf7-ad82-78948a4e6f14.jpg",
   ],
+
+  // * 8단계
+  description: "",
 };
 
 const registerRoom = createSlice({
@@ -292,6 +298,11 @@ const registerRoom = createSlice({
     // * 숙소 사진 변경하기
     setPhotos(state, action: PayloadAction<string[]>) {
       state.photos = action.payload;
+      return state;
+    },
+    // * 숙소 설명 변경하기
+    setDescription(state, action: PayloadAction<string>) {
+      state.description = action.payload;
       return state;
     },
   },
