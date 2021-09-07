@@ -2,9 +2,8 @@ import React from "react";
 import GlobalStyle from "../styles/GlobalStyle";
 import { wrapper } from "store";
 import App, { AppContext } from "next/app";
-import { cookieStringToObject } from "lib/utill";
+import { cookieStringToObject } from "@/lib/utils";
 import axios from "lib/api";
-import { meAPI } from "lib/api/auth";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import { userAction } from "@/store/user";
 
