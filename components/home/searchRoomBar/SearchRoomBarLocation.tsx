@@ -162,7 +162,7 @@ const SearchRoomBarLocation = () => {
 
   return (
     <Container onClick={onClickInput}>
-      <OutsideClickHandler onOutsideClick={() => setPopupOpend((prev) => !prev)}>
+      <OutsideClickHandler onOutsideClick={() => setPopupOpend(false)}>
         <div className="search-room-bar-location-texts">
           <p className="search-room-bar-location-label">장소</p>
           <input
