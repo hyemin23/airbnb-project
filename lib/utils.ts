@@ -1,15 +1,15 @@
 // 쿠키 문자열에서 access_token을 추출하는 함수
-// "token=value"를 {token : "value"}로 바꾸는 함수
+//* "token=value"를 {token : "value"}로 바꾸는 함수
 export const cookieStringToObject = (cookieString: string | undefined) => {
   const cookies: { [key: string]: string } = {};
 
   if (cookieString) {
-    // * "token = value"
+    // "token = value"
     //   whitespace , ; 를 기준으로 찾음
     const itemString = cookieString?.split(/\s*;\s*/);
 
     itemString?.forEach((item) => {
-      //  * ["token","value"]
+      //  ["token","value"]
       // "="를 기준으로 찾아서 split
       const pair = item.split(/\s*=\s*/);
 
@@ -22,7 +22,7 @@ export const cookieStringToObject = (cookieString: string | undefined) => {
   return cookies;
 };
 
-// string에서 number만 빼내는 함수
+//* string에서 number만 빼내는 함수
 export const getNumber = (string: string) => {
   const numbers = string.match(/\d/g)?.join("");
 
@@ -40,4 +40,26 @@ export const makeMoneyToString = (inputValue: string) => {
     return parseInt(amountString, 10).toLocaleString();
   }
   return "0";
+};
+
+// * query string 만들기
+export const makeQueryString = (baseURL: string, queriesObject: Object & { [key: string]: any }) => {
+  const keys = Object.keys(queriesObject);
+  const values = Object.values(queriesObject);
+
+  if (keys.length === 0) {
+    return baseURL;
+  }
+
+  let queryString = `${baseURL}`;
+
+  keys.forEach((key, i) => {
+    //해당key에 값이 있으면
+    if (queriesObject[key]) {
+      queryString += `${keys[i]}=${values[i]}&`;
+    }
+  });
+
+  // * 마지막 '&'제거 (문자열 맨 끝에는 &가 필요 없음)
+  return queryString.slice(0, -1);
 };
