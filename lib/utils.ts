@@ -51,7 +51,7 @@ export const makeQueryString = (baseURL: string, queriesObject: Object & { [key:
     return baseURL;
   }
 
-  let queryString = `${baseURL}`;
+  let queryString = `${baseURL}?`;
 
   keys.forEach((key, i) => {
     //해당key에 값이 있으면

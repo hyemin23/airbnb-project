@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send(result);
     } catch (error) {
       res.statusCode = 404;
-      console.log(e);
+      console.log(error);
       return res.end();
     }
   }
