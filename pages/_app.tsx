@@ -6,11 +6,13 @@ import { cookieStringToObject } from "@/lib/utils";
 import axios from "lib/api";
 import { AppProps } from "next/dist/next-server/lib/router/router";
 import { userAction } from "@/store/user";
+import Header from "@/components/Header";
 
 const app = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <GlobalStyle />
+      <Header />
       <Component {...pageProps} />
       {/* createPortal */}
       {/* 첫 번쨰 인자 : react component , 두 번째 인자 : react component를 넣을 DOM */}

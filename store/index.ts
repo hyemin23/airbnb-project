@@ -1,7 +1,8 @@
+import searchRoom from "./searchRoom";
 // redux wrapper와 type이 지원되는 custom useSelector
 
 import { configureStore } from "@reduxjs/toolkit";
-import { Context, createWrapper, HYDRATE, MakeStore } from "next-redux-wrapper";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { TypedUseSelectorHook, useSelector as useReduxSelector } from "react-redux";
 import { combineReducers } from "redux";
 import auth from "./auth";
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user: user.reducer,
   auth: auth.reducer,
   registerRoom: registerRoom.reducer,
+  searchRoom: searchRoom.reducer,
 });
 
 // store type

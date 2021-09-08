@@ -40,7 +40,7 @@ const Container = styled.div`
       font-size: 16px;
       outline: none;
 
-      &:placeholder {
+      &::placeholder {
         color: ${palette.gray_76};
       }
       &:focus {
