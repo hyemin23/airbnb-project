@@ -26,7 +26,8 @@ const Container = styled.div<InputContainerProps>`
     border-radius: 4px;
     font-size: 16px;
     outline: none;
-    ::placeholder {
+
+    &::placeholder {
       color: ${palette.gray_76};
     }
 

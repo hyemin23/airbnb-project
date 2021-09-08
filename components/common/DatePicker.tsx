@@ -130,6 +130,14 @@ const Container = styled.div`
       border: 0;
     }
   }
+
+  input {
+    &::placeholder {
+      font-size: 14px;
+      opacity: 0.7;
+      color: ${palette.gray_76};
+    }
+  }
 `;
 
 const DatePicker: React.FC<ReactDatePickerProps> = ({ onChange, ...props }) => {

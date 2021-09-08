@@ -67,6 +67,7 @@ const Counter: React.FC<IProps> = ({ label, value = 1, minValue = 0, increaseNum
         <button
           type="button"
           disabled={value === minValue}
+          // 버튼을 먼저 클릭하게되면 여기가 실행되면서 전달받은 onChange 이벤트가 있을 경우에만 값을 증가OR감소 시켜서 해당 value를 호출한곳의 onChange이벤트의 인수로 전달
           onClick={() => {
             if (onChange) {
               onChange(value - increaseNum);
