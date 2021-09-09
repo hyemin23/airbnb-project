@@ -3,6 +3,9 @@ import { RoomType } from "@/types/room";
 import React, { useMemo } from "react";
 import styled, { css } from "styled-components";
 import palette from "styles/palette";
+import { useSelector } from "@/store/index";
+import { differenceInDays } from "date-fns";
+import { makeMoneyToString } from "@/lib/utils";
 
 const Container = styled.li<{ showMap: boolean }>`
   width: calc((100% - 48px) / 4);
@@ -132,6 +135,12 @@ interface IProps {
   showMap: boolean;
 }
 const RoomCard: React.FC<IProps> = ({ room, showMap }) => {
+  const checkInDate = useSelector((state) => state.searchRoom.checkInDate);
+  const checkOutDate = useSelector((state) => state.searchRoom.checkOutDate);
+
+  // startDate 와 endDate 사이의 일수 차이
+  const remainDays = checkOutDate && checkInDate && differenceInDays(new Date(checkOutDate), new Date(checkInDate));
+
   // * 한글로 된 숙소 유형
   const translatedRoomType = useMemo(() => {
     switch (room.roomType) {
@@ -148,22 +157,27 @@ const RoomCard: React.FC<IProps> = ({ room, showMap }) => {
 
   return (
     <Container showMap={showMap}>
-      <Link href="">
+      <Link href={`/room/${room.id}`}>
         <a>
           <div className="room-card-photo-wrapper">
             <img src={room.photos[0]} alt="" />
           </div>
           <div className="room-card-info-texts">
             <p className="room-card-room-info">
-              {room.buildingType} {translatedRoomType}
-              {room.district} {room.city}
+              {room.buildingType} {translatedRoomType} {room.district} {room.city}
             </p>
             <p className="room-card-title">{room.title}</p>
             <div className="room-card-text-divider" />
+
             <p className="room-card-price">
-              <b>₩{room.price}</b>1박
+              <b>₩{room.price} </b>/1박
             </p>
-            <p className="room-card-total-price">총 요금:₩</p>
+            {/* 1박 가격 * 남은일수 */}
+            {!!remainDays && (
+              <p className="room-card-total-price">
+                총 요금: ₩{makeMoneyToString(`${Number(room.price) * remainDays}`)}
+              </p>
+            )}
           </div>
         </a>
       </Link>
