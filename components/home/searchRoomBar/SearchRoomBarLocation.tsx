@@ -23,7 +23,7 @@ const Container = styled.div`
 
   .search-room-bar-location-texts {
     position: absolute;
-    width: calc(100%-40px);
+    width: calc(100% - 40px);
     top: 16px;
     left: 20px;
 

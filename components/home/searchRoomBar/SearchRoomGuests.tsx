@@ -25,7 +25,7 @@ const Container = styled.div`
   }
   .search-room-bar-guests-texts {
     position: absolute;
-    width: calc(100%-114px);
+    width: calc(100% - 114px);
     top: 16px;
     left: 20px;
   }
