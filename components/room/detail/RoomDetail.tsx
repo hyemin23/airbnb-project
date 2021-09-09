@@ -6,6 +6,7 @@ import palette from "styles/palette";
 import RoomDetailPhotos from "./RoomDetailPhotos";
 import BedIcon from "@/assets/svg/Icon/detail/bed.svg";
 import RoomAmentityIcon from "./RoomAmentityIcon";
+import RoomDetailReservation from "./RoomDetailReservation";
 
 const Container = styled.div`
   width: 1120px;
@@ -193,7 +194,7 @@ const RoomDetail = () => {
             </>
           )}
         </div>
-        {/* <RoomDetailReservation /> */}
+        <RoomDetailReservation />
       </section>
     </Container>
   );
