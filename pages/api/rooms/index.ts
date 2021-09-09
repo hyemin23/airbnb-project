@@ -10,42 +10,64 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     try {
       const rooms = Data.room.getList();
+      //* 위치로 필터링 하기
+      const filteredRooms = rooms.filter((room) => {
+        if (latitude && latitude !== "0" && longitude && longitude !== "0") {
+          if (
+            !(
+              Number(latitude) - 0.5 < room.latitude &&
+              room.latitude < Number(latitude) + 0.05 &&
+              Number(longitude) - 0.5 < room.longitude &&
+              room.longitude < Number(longitude) + 0.05
+            )
+          ) {
+            return false;
+          }
+        }
+        if (checkInDate) {
+          if (
+            new Date(checkInDate as string) < new Date(room.startDate) ||
+            new Date(checkInDate as string) > new Date(room.endDate)
+          ) {
+            return false;
+          }
+        }
+        if (checkOutDate) {
+          if (
+            new Date(checkOutDate as string) < new Date(room.startDate) ||
+            new Date(checkOutDate as string) > new Date(room.endDate)
+          ) {
+            return false;
+          }
+        }
 
-      // * 개수 자르기
-      const limitedRooms = rooms.splice(0 + (Number(page) - 1) * Number(limit), Number(limit));
+        if (room.maximumGuestCount < Number(adultCount as string) + (Number(childrenCount as string) * 0.5 || 0)) {
+          return false;
+        }
 
-      // console.log("개수자르기 : ", limitedRooms);
+        return true;
+      });
 
-      // * host 정보 넣기
-      const roomWithHost = await Promise.all(
+      //* 갯수 자르기
+      const limitedRooms = filteredRooms.splice(0 + (Number(page) - 1) * Number(limit), Number(limit));
+      //* host 정보 넣기
+      const roomsWithHost = await Promise.all(
         limitedRooms.map(async (room) => {
-          // id값으로 host 찾기
-          const host = Data.user.find({
-            id: room.hostId,
-          });
-          return {
-            ...room,
-            host,
-          };
+          const host = await Data.user.find({ id: room.hostId });
+          return { ...room, host };
         }),
       );
-
-      // console.log("roomWithHost정보", roomWithHost);
-
       res.statusCode = 200;
-      return res.send(roomWithHost);
+      return res.send(roomsWithHost);
     } catch (e) {
       console.log(e);
     }
   }
 
   if (req.method === "POST") {
-    // ?숙소 등록하기
+    //? 숙소 등록 하기
     try {
-      // rooms 는 배열
       const rooms = await Data.room.getList();
-
-      // rooms가 비어있으면
       if (isEmpty(rooms)) {
         const newRoom: StoredRoomType = {
           id: 1,
@@ -53,31 +75,26 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         };
-
-        //   배열로 만들어 저장
         Data.room.write([newRoom]);
         res.statusCode = 201;
         return res.end();
       }
 
-      // 비어있지 않은 경우
       const newRoom: StoredRoomType = {
-        // 마지막 데이터 길이 +1의 id
-        id: rooms[rooms.length - 1].id++,
+        id: rooms[rooms.length - 1].id + 1,
         ...req.body,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-
       Data.room.write([...rooms, newRoom]);
       res.statusCode = 201;
       return res.end();
     } catch (e) {
       console.log(e);
-      return res.send(e as unknown);
+      return res.send(e);
     }
   }
-
   res.statusCode = 405;
+
   return res.end();
 };

@@ -57,4 +57,6 @@ export type SearchRoomState = {
 // * 숙소 redux state
 export type RoomState = {
   rooms: RoomType[];
+  // 숙소 상세 페이지에 들어갈 숙소의 값
+  detail: RoomType | null;
 };
