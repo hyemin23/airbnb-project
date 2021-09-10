@@ -6,22 +6,22 @@ import WarningIcon from "@/assets/svg/Icon/warning.svg";
 
 // 기존셀렉터 스타일
 const normalSelectorStyle = css`
+  width: 100%;
+  height: 46px;
+
   select {
     width: 100%;
-
     height: 100%;
     background-color: white;
     border: 1px solid ${palette.gray_eb};
+    font-size: 16px;
     padding: 0 11px;
     border-radius: 4px;
     outline: none;
-    /* 브라우저에 내장된 효과 제거 */
     -webkit-appearance: none;
     background-image: url("/static/svg/Icon/selecticon.svg");
     background-position: right 11px center;
     background-repeat: no-repeat;
-    font-size: 16px;
-
     &:focus {
       border-color: ${palette.dark_cyan};
     }
