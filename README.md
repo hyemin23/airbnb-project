@@ -68,8 +68,13 @@
  </div>
 
 <h3 align="center">🍀 숙소 등록하기 (총 11단계)</h3>
-(용량이 커 링크 첨부로 대신하였습니다.)
-https://hnet.com/video-to-gif/showmymp4/20210909-21-xc15fgKdmBp6LDsj/small.mp4
+
+
+
+
+<img src="https://user-images.githubusercontent.com/54235714/132825618-fad11697-15a5-499e-997e-1a45da856ac5.gif" alt="단계" width="100%" height="100%" />
+<p>gif 파일이 보이지 않을 경우 해당 링크에서 확인해주세요 !</p>
+<p>https://hnet.com/video-to-gif/showmymp4/20210909-21-xc15fgKdmBp6LDsj/small.mp4</p>
 
 <div>
 
