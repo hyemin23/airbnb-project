@@ -1,6 +1,6 @@
 <h1 align="center">✈️ Air-bnb Project ✈️</h1>
 
- <img width="" height="" src=""/>
+<!--  <img width="" height="" src=""/> -->
 
 <h3 align="center">🍀 Main Page </h3>
  
@@ -59,7 +59,8 @@
 <p>사진이 5장 이상인 경우 </p>
  <img src="https://user-images.githubusercontent.com/54235714/132815658-bfd63299-1da1-4162-b4e4-802c19919da6.png"  width="100%" height="100%" />
  <p>사진이 3 OR 4장인 경우</p>
-<img src="https://user-images.githubusercontent.com/54235714/120266155-461f9280-c2dc-11eb-8e9d-5b44d1b5e6fc.gif"  width="30%" height="50%" />
+ <img width="100%" height="100%" src="https://user-images.githubusercontent.com/54235714/132822728-04c1d0d1-e166-4aad-a7e0-ed316e47d60b.png"/>
+ 
 <p>숙소 예약</p>
 <img width="100%" height="100%" src="https://user-images.githubusercontent.com/54235714/132816239-e7544b2e-d8c0-4c59-8631-e2d56e01542f.png"/>
 <p>- 사진마다 Layout의 비율을 다르게하여 대표 사진와 서브 사진의 구조를 다르게 하였으며 편의시설 및 침구 & 예약 가능 여부를 확인 하고 useRef를 통한 focus 제어 & 일정을 통한 금액을 계산하였습니다. </p>
@@ -67,6 +68,9 @@
  </div>
 
 <h3 align="center">🍀 숙소 등록하기 (총 11단계)</h3>
+(용량이 커 링크 첨부로 대신하였습니다.)
+https://hnet.com/video-to-gif/showmymp4/20210909-21-xc15fgKdmBp6LDsj/small.mp4
+
 <div>
 
 <img src="" alt="" width="" height=""/>
