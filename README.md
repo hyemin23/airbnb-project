@@ -16,7 +16,7 @@
  </p>
 
  <h3 align="center"> Search Bar </h3>
- <img width="100%" height="100%" src="https://user-images.githubusercontent.com/54235714/132812819-6a706b36-c233-47e0-8860-4b0eb10a7538.png"/>
+ <img width="50%" height="100%" src="https://user-images.githubusercontent.com/54235714/132812819-6a706b36-c233-47e0-8860-4b0eb10a7538.png"/>
  <p>
  Search bar 기능 : 장소 자동완성 (lat,lng 값 저장), 체크인 & 체크아웃 활용 & 게스트 인원 설정에 따른 검색 결과 filter 적용, debounce hooks를 통한 요청 최소화.
  </p>
@@ -24,8 +24,8 @@
 
 <h3 align="center">🍀 LOGIN/ LOGOUT Modal</h3>
 <div>
- <img src="https://user-images.githubusercontent.com/54235714/132813409-2d58998c-9391-4176-9655-882948c4df20.png"  width="50%" height="50%" />
-<img src="https://user-images.githubusercontent.com/54235714/132813330-03ce87dc-c308-4766-b828-e6976846dbef.png"  width="50%" height="50%" />
+ <img src="https://user-images.githubusercontent.com/54235714/132813409-2d58998c-9391-4176-9655-882948c4df20.png"  width="100%" height="50%" />
+<img src="https://user-images.githubusercontent.com/54235714/132813330-03ce87dc-c308-4766-b828-e6976846dbef.png"  width="100%" height="50%" />
  </div>
 -  Next API & 모달을 사용한 Login & Logout & 회원가입 validation check.
 
