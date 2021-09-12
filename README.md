@@ -25,14 +25,6 @@
  </p>
 <br/>
 
-<h3 align="center">🍀 LOGIN/ LOGOUT Modal</h3>
-<div>
- <img src="https://user-images.githubusercontent.com/54235714/132813409-2d58998c-9391-4176-9655-882948c4df20.png"  width="100%" height="50%" />
-<img src="https://user-images.githubusercontent.com/54235714/132813330-03ce87dc-c308-4766-b828-e6976846dbef.png"  width="100%" height="50%" />
- </div>
--  Next API & 모달을 사용한 Login & Logout & 회원가입 validation check.
-
-<br/>
 <h3 align="center">Check In & Check Out </h3>
 <div>
 <img width="100%" height="100%" src="https://user-images.githubusercontent.com/54235714/132813732-040ccab2-8fa6-4697-9149-0529e90e07fc.png"/>
@@ -45,6 +37,15 @@
 <img src="https://user-images.githubusercontent.com/54235714/132814351-7fd7bcab-d273-4f20-abf3-c88049ad306d.png"  width="100%" height="100%"/>
 <p>- Counter hooks를 통하여 최솟값과 최댓값을 쉽게 제어할 수 있습니다.</p>
 </div>
+
+<h3 align="center">🍀 LOGIN/ LOGOUT Modal</h3>
+<div>
+ <img src="https://user-images.githubusercontent.com/54235714/132813409-2d58998c-9391-4176-9655-882948c4df20.png"  width="100%" height="50%" />
+<img src="https://user-images.githubusercontent.com/54235714/132813330-03ce87dc-c308-4766-b828-e6976846dbef.png"  width="100%" height="50%" />
+ </div>
+-  Next API & 모달을 사용한 Login & Logout & 회원가입 validation check.
+
+<br/>
 
 <br/>
 <h3 align="center">🍀 Room List Page </h3>
