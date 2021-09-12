@@ -6,7 +6,7 @@
  
  <div>
 <p align="center">
- <img alt="메인페이지" src="https://user-images.githubusercontent.com/54235714/132812511-75c56624-4476-4818-9667-416efc851620.png" width="50%" height="50%"/>
+ <img alt="메인페이지" src="https://user-images.githubusercontent.com/54235714/132812511-75c56624-4476-4818-9667-416efc851620.png" width="100%" height="50%"/>
  </p>
  </div>
 
@@ -16,7 +16,10 @@
  </p>
 
  <h3 align="center"> Search Bar </h3>
+ <p align="center">
  <img width="50%" height="100%" src="https://user-images.githubusercontent.com/54235714/132812819-6a706b36-c233-47e0-8860-4b0eb10a7538.png"/>
+ </p>
+ 
  <p>
  Search bar 기능 : 장소 자동완성 (lat,lng 값 저장), 체크인 & 체크아웃 활용 & 게스트 인원 설정에 따른 검색 결과 filter 적용, debounce hooks를 통한 요청 최소화.
  </p>
